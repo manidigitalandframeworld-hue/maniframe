@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mani Digital & Frame World</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-weight/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap');
+        .brand-font { font-family: 'Cinzel', serif; }
+        .body-font { font-family: 'Montserrat', sans-serif; }
+        .gold-gradient { background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%); }
+        .gold-text { background: linear-gradient(135deg, #BF953F 0%, #B38728 50%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-border { border-color: #D4AF37; }
+    </style>
+</head>
+<body class="body-font bg-[#FAFAFA] text-gray-800">
+
+    <div class="bg-black text-[#D4AF37] text-xs py-2 px-4 flex justify-between items-center border-b gold-border">
+        <div><i class="fas fa-phone alt mr-1"></i> +91 8667692523</div>
+        <div class="hidden sm:block">Premium Digital Art & Luxury Framing</div>
+        <div><i class="fas fa-envelope mr-1"></i> manidigitalandframeworld@gmail.com</div>
+    </div>
+
+    <header class="sticky top-0 bg-white shadow-sm z-40 border-b border-gray-100">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-center sm:text-left">
+                <h1 class="brand-font text-xl sm:text-2xl font-bold tracking-widest text-black">MANI DIGITAL</h1>
+                <p class="brand-font text-xs tracking-widest gold-text -mt-1">& FRAME WORLD</p>
+            </div>
+            <div class="relative cursor-pointer" onclick="toggleCart()">
+                <i class="fas fa-shopping-bag text-2xl text-gray-800 hover:text-[#B38728] transition"></i>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-[#D4AF37] text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative bg-white py-16 border-b border-gray-100 overflow-hidden">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <span class="gold-text brand-font tracking-widest font-bold uppercase text-sm">Welcome to Excellence</span>
+            <h2 class="brand-font text-3xl sm:text-5xl font-bold text-gray-900 mt-2 mb-4">Preserving Your Beautiful Memories</h2>
+            <p class="text-gray-500 max-w-xl mx-auto text-sm sm:text-base mb-8">Premium digital photo edits, oil painting conversions, and luxury custom framing crafted to last a lifetime.</p>
+            <a href="#shop" class="gold-gradient text-black font-semibold px-8 py-3 rounded-none uppercase tracking-wider text-sm shadow-md hover:opacity-90 transition">Explore Gallery</a>
+        </div>
+    </section>
+
+    <section class="container mx-auto px-4 py-12">
+        <div class="bg-white p-6 sm:p-8 border border-gray-200 shadow-sm max-w-3xl mx-auto">
+            <h3 class="brand-font text-xl font-bold text-gray-900 mb-2 text-center uppercase tracking-wide">Custom Frame Size Calculator</h3>
+            <p class="text-xs text-center text-gray-500 mb-6">Need a specific size? Design your custom frame dimension pricing instantly.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Width (Inches)</label>
+                    <input type="number" id="custom-width" min="4" max="100" value="12" class="w-full border p-2 text-center focus:outline-none focus:border-[#B38728]" oninput="calculateCustomPrice()">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Height (Inches)</label>
+                    <input type="number" id="custom-height" min="4" max="100" value="18" class="w-full border p-2 text-center focus:outline-none focus:border-[#B38728]" oninput="calculateCustomPrice()">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Frame Profile Type</label>
+                    <select id="custom-type" class="w-full border p-2 bg-white focus:outline-none focus:border-[#B38728]" onchange="calculateCustomPrice()">
+                        <option value="luxury-gold" data-factor="5">Premium Luxury Gold</option>
+                        <option value="classic-black" data-factor="3.5">Classic Textured Black</option>
+                        <option value="minimal-white" data-factor="3.5">Minimalist Gallery White</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="text-center bg-[#FAFAFA] p-4 border border-dashed mb-6">
+                <span class="text-sm text-gray-500 block">Estimated Custom Price</span>
+                <span class="text-2xl font-bold text-gray-900">₹<span id="custom-price-display">1080</span></span>
+            </div>
+
+            <button onclick="addCustomToCart()" class="w-full bg-black text-[#D4AF37] hover:bg-gray-900 transition py-3 uppercase tracking-wider text-sm font-semibold">Add Custom Frame to Order</button>
+        </div>
+    </section>
+
+    <main id="shop" class="container mx-auto px-4 py-12">
+        <h3 class="brand-font text-2xl font-bold text-center uppercase tracking-widest mb-12">Our Featured Catalog</h3>
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div class="text-center py-12 col-span-full text-gray-400"><i class="fas fa-spinner fa-spin mr-2"></i>Loading luxury catalog...</div>
+        </div>
+    </main>
+
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 flex flex-col hidden">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+            <h4 class="brand-font text-lg font-bold tracking-wider">YOUR SELECTIONS</h4>
+            <button onclick="toggleCart()" class="text-gray-500 hover:text-black text-xl"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            </div>
+
+        <div class="p-6 border-t border-gray-100 bg-[#FAFAFA]">
+            <div class="flex justify-between items-center mb-6">
+                <span class="font-semibold text-gray-700">Total Valuation:</span>
+                <span class="text-xl font-bold text-gray-900">₹<span id="cart-total">0</span></span>
+            </div>
+            <button onclick="checkoutWhatsApp()" class="w-full bg-[#25D366] text-white py-3 font-semibold tracking-wider uppercase text-sm flex items-center justify-center gap-2 hover:bg-[#20ba59] transition shadow-md">
+                <i class="fab fa-whatsapp text-lg"></i> Complete Order via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <footer class="bg-white border-t border-gray-200 mt-20 py-12 text-center text-xs text-gray-400">
+        <p class="brand-font font-bold text-gray-700 tracking-wider mb-2">MANI DIGITAL & FRAME WORLD</p>
+        <p class="mb-4">Neyveli | Professional Framing & High-Resolution Digital Oil Paintings</p>
+        <p>&copy; 2026 Mani Digital & Frame World. All Rights Reserved.</p>
+    </footer>
+
+    <script type="module">
+        import { db, collection, getDocs } from './firebase-config.js';
+
+        let cart = [];
+        const whatsappNumber = "918667692523";
+
+        // Fetch products from Firebase Firestore
+        async function fetchProducts() {
+            const grid = document.getElementById('product-grid');
+            try {
+                const querySnapshot = await getDocs(collection(db, "products"));
+                grid.innerHTML = "";
+                
+                if(querySnapshot.empty) {
+                    grid.innerHTML = `<div class="col-span-full text-center py-8 text-gray-400">No showcase catalog items found. Open Admin portal to add products.</div>`;
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const product = doc.data();
+                    grid.innerHTML += `
+                        <div class="bg-white border border-gray-200 rounded-none overflow-hidden hover:shadow-lg transition flex flex-col group">
+                            <div class="relative bg-gray-100 aspect-square overflow-hidden">
+                                <img src="${product.image || 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=500'}" alt="${product.name}" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col justify-between text-center">
+                                <div>
+                                    <h4 class="brand-font text-sm font-bold tracking-wide uppercase text-gray-900 mb-1">${product.name}</h4>
+                                    <p class="text-xs text-gray-400 mb-3">${product.description || 'Premium high gloss frame finish'}</p>
+                                </div>
+                                <div>
+                                    <div class="text-base font-semibold text-gray-800 mb-3">₹${product.price}</div>
+                                    <button onclick="addToCart('${product.name}', ${product.price})" class="w-full border border-black hover:bg-black hover:text-[#D4AF37] text-xs font-semibold py-2 uppercase tracking-wider transition">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch(e) {
+                console.error("Error structural fetching layout catalog: ", e);
+                grid.innerHTML = `<div class="col-span-full text-center text-red-500">Failed loading catalog items. Make sure Firebase initialization matches configuration.</div>`;
+            }
+        }
+
+        // Custom Calculator Framework calculation variables
+        window.calculateCustomPrice = function() {
+            const w = parseFloat(document.getElementById('custom-width').value) || 0;
+            const h = parseFloat(document.getElementById('custom-height').value) || 0;
+            const type = document.getElementById('custom-type');
+            const factor = parseFloat(type.options[type.selectedIndex].getAttribute('data-factor'));
+            
+            const area = w * h;
+            const price = Math.round(area * factor);
+            document.getElementById('custom-price-display').innerText = price < 250 ? 250 : price; // Base floor cost minimum limit safeguard
+        }
+
+        window.addCustomToCart = function() {
+            const w = document.getElementById('custom-width').value;
+            const h = document.getElementById('custom-height').value;
+            const typeText = document.getElementById('custom-type').options[document.getElementById('custom-type').selectedIndex].text;
+            const price = parseInt(document.getElementById('custom-price-display').innerText);
+
+            const itemName = `Custom Frame (${w}x${h}") - ${typeText}`;
+            addToCart(itemName, price);
+        }
+
+        // Operational Cart Functions mapped to global space window objects
+        window.addToCart = function(name, price) {
+            const target = cart.find(item => item.name === name);
+            if(target) {
+                target.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCartUI();
+        }
+
+        window.updateQuantity = function(index, change) {
+            cart[index].quantity += change;
+            if(cart[index].quantity <= 0) cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            const countBadge = document.getElementById('cart-count');
+            const totalDisplay = document.getElementById('cart-total');
+            
+            container.innerHTML = "";
+            let total = 0;
+            let totalItems = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                totalItems += item.quantity;
+                container.innerHTML += `
+                    <div class="flex justify-between items-center bg-[#FAFAFA] p-3 border border-gray-100">
+                        <div class="flex-1 pr-2">
+                            <h5 class="text-xs font-semibold text-gray-900 uppercase tracking-wide">${item.name}</h5>
+                            <span class="text-xs text-gray-500">₹${item.price} each</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="updateQuantity(${index}, -1)" class="w-6 h-6 border bg-white flex items-center justify-center text-xs hover:bg-gray-100">-</button>
+                            <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="updateQuantity(${index}, 1)" class="w-6 h-6 border bg-white flex items-center justify-center text-xs hover:bg-gray-100">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            countBadge.innerText = totalItems;
+            totalDisplay.innerText = total;
+        }
+
+        window.toggleCart = function() {
+            const sidebar = document.getElementById('cart-sidebar');
+            sidebar.classList.toggle('hidden');
+            sidebar.classList.toggle('translate-x-full');
+        }
+
+        // WhatsApp Order Link Dispatch Generation Mapping
+        window.checkoutWhatsApp = function() {
+            if(cart.length === 0) {
+                alert("Your cart collection list is empty.");
+                return;
+            }
+
+            let message = `*NEW ORDER - MANI DIGITAL & FRAME WORLD*\n`;
+            message += `-------------------------------------------\n\n`;
+            
+            cart.forEach((item, index) => {
+                message += `${index + 1}. *${item.name}*\n`;
+                message += `   Qty: ${item.quantity} | Cost: ₹${item.price * item.quantity}\n\n`;
+            });
+
+            const finalTotal = document.getElementById('cart-total').innerText;
+            message += `-------------------------------------------\n`;
+            message += `*Grand Total Valuation: ₹${finalTotal}*\n\n`;
+            message += `Please confirm availability and dispatch window options. Thank you!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+        }
+
+        // Primary initialization runtime executions
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchProducts();
+            calculateCustomPrice();
+        });
+    </script>
+</body>
+</html>
